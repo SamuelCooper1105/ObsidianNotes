@@ -12,5 +12,7 @@ Alright so we start with the Main block obviously, which calls the System functi
 This process is then repeated in the second branch of network 1. A lot of what seems t o be going on here in this function, is setting a timer and setting a light to go off, which signals the status of the system.
 
 
+Moving on to the Layout part of the Main block, Layout starts off with a block called HCC, this is a function block that takes in the inputs from the K19( idk what this is, All I know is that its a another machine in the project) as well as a value called Status[3]  from DB_SCADA. The code then outputs K19's Outputs, and HCC112 from the DB_SCADA. 
+Okay looking into the HCC function block, it seems to just be handling all of the K19 inputsand outputs either jsut keeping them normally closed or just setting the outputs to be on once the HCC block is ran. 
 
-
+The second network in Layout, is a function block named Startzone 
