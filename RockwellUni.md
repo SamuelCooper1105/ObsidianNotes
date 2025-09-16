@@ -29,3 +29,7 @@ Tags are the specified data within the controller memory. These are identified b
 #### Parameters:
 
 A parameter may be accessed from within the program where they are located. They can also be accessed from outside the program using connections or a special type of addressing that includes the program name. Parameters refer to data that is contained in controller memory that can be accessed from within the program where the data is associated, outside of the program when a connection is present, and can be accessed outside the program with special addressing. 
+
+#### Hardware Tags
+
+hardware tags are automatically created by rockwell software when you add hardware. These are module defined data types that are related to a specfic module. we should be able to connect hardware tags to parameters so that the program can connect to the hardware and modify the external values of that hardware. The data types in the tags and the parameters must be the same. 
