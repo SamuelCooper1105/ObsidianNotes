@@ -64,13 +64,9 @@ IF the user wins then the program will break the loop and the program.
 so we can handle this with the keyword continue, we just need to change the Err handling when we convert the String. The code will appear as follows,
 `let guess; u32 = match guess.trim().parse(){Ok(num) => num, Err(_) => continue,};` 
 
-By hcaning expect to a match expression we can effectively just check the enumrations of prase(), so if Ok is a num then the code continues, and if Err contains any value, we can use _ as a catchall for this purpose, this then goes to the continue command which tells the code to begin the next iteration of the loop which will then prompt the user fora another set of input. 
+By hcaning expect to a match expression we can effectively just check the enumrations of parse(), so if Ok is a num then the code continues, and if Err contains any value, we can use _ as a catchall for this purpose, this then goes to the continue command which tells the code to begin the next iteration of the loop which will then prompt the user fora another set of input. 
 
 Here is the finished code for Chapter 2: 
-` 	use std::cmp::Ordering;
-	use std::io;
-
-	use rand::io;
 
 	fn main(){
   		println!("Guess the Number!");
@@ -96,9 +92,16 @@ Here is the finished code for Chapter 2:
     		}
   		}
 	}
-` 
+
 
 #### Chapter 3:
 
+So in Rust variables are immutable by default. the `mut` keyword allows for us to make a variable mutable.
+##### Constants
+Constants are values that are bound to a name and are not allowed to change under any circumstances, they remain immutable throughtout the scope of the code. declared using the `const` keyword, the type of data the const is must also be declared. The naming convention for constants is to use all upper case, with words seperated by underscores. 
+##### Shadowing
+Shadowing is when we create a new variable using a prexisting name for a variable. The second value declared overshadows the first variable named, as long as it remains within the scope it is declared within. There is no need to use `mut` within this context, as by shadowing a variable you are effectively creating a new variable, you're just sharing the name and giving priority of the name to the 'new' variable. For example if you declared a value and made it mutable, but then tried to change the data type you would get a compile error as you can not mutate a variable's data type. 
 
+##### Data Types: 
+Rust is statically type so you should know the type of all variables at run time. The compiler can usally infer what data type we want to use at compile time, but there are times where multiple data types could be possible. 
 
