@@ -67,35 +67,36 @@ so we can handle this with the keyword continue, we just need to change the Err 
 By hcaning expect to a match expression we can effectively just check the enumrations of prase(), so if Ok is a num then the code continues, and if Err contains any value, we can use _ as a catchall for this purpose, this then goes to the continue command which tells the code to begin the next iteration of the loop which will then prompt the user fora another set of input. 
 
 Here is the finished code for Chapter 2: 
-` use std::cmp::Ordering;
-use std::io;
+` 	use std::cmp::Ordering;
+	use std::io;
 
-userand::io;
+	use rand::io;
 
-fn main(){
-  println!("Guess the Number!");
+	fn main(){
+  		println!("Guess the Number!");
 
-  let secret_number = rand::thread_rng().gen_length(1..=100);
+  		let secret_number = rand::thread_rng().gen_length(1..=100);
 
-  loop{
-    println!("Please input your guess.');
+  		loop{
+    		println!("Please input your guess.');
   
-    let mut guess = String::new();
+    		let mut guess = String::new();
 
-    io::stdin(),read_line(&mut guess).expect("Failed to read line");
-    let guess: u32 = match guess.trim().parse(){ Ok(num) =>num,Err(_)=> continue,};
-    println!("You guessed: { guess}");
+    		io::stdin(),read_line(&mut guess).expect("Failed to read line");
+	  		let guess: u32 = match guess.trim().parse(){ Ok(num) =>num,Err(_)=> continue,};
+    		println!("You guessed: { guess}");
 
-    match guess.cmp(&secret_number){
-      Ordering::Less=>println!("too small!"),
-      ORdering::Greater => println!("too big!"),
-      Ordering::EQual =>{
-        println!("you win!");
-        break;
-      }
-    }
-  }
-}`
+    		match guess.cmp(&secret_number){
+     			Ordering::Less=>println!("too small!"),
+      			ORdering::Greater => println!("too big!"),
+      			Ordering::EQual =>{
+       				println!("you win!");
+        			break;
+      			}
+    		}
+  		}
+	}
+` 
 
 #### Chapter 3:
 
