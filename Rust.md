@@ -105,3 +105,26 @@ Shadowing is when we create a new variable using a prexisting name for a variabl
 ##### Data Types: 
 Rust is statically typed so you should know the type of all variables at run time. The compiler can usally infer what data type we want to use at compile time, but there are times where multiple data types could be possible. These data types include Scalar values, these represent a single value and include integers, floating points, booleans, and characters. An integer is a number with no fractional component, there are signed (i) and unsigned (u) integers which refer to if they can support a negative number or not. 
 
+
+
+let f: bool = true
+let t: bool = false
+
+Compound Types:
+
+These are types of data that can contain other data types. In Rust the main kinds of compound types are the tuple and the array. The tuple is a general way of grouping values together regardless of their data type. Tuples like arrays have a fixed size and can not grow or shrink.
+They are declared as follows.
+`fn main(){
+	let tup: ( i32, f63, bool) = ( 101, 56.78, true);
+}`
+
+you may use pattern matching to destructure a tuple and fetch individual elements, like as follows ` let (x,y,z) = tup;` it is also possible to access individual elemetns of a tuple by refrecning the index using a period, this can be done as follows`let one_oh_one = tup.0` this would assign the value 101 to the variable one_oh_one. Now a tuple with no values is called a unit and this is the default return type for a function if no return type is specified. 
+
+The array is another compound data type except an array may only contain values of the same data type. They are declared as follows, `let arr = [1,2,3,4,5];` they are allocated on the stack, and will always have a fixed size. A vector is also included within Rust but is not within the standard library. you can decide what the size and data type of an array will be by declaring it as follows, ` let arr[u32; 5] =[1,2,3,4,5]; `. To intitlize an array with a set value in each indice, you will need to declare it as follows, `let arr = [3;5];`. You can access elements just like you would in c/c++ or python. 
+
+
+##### Functions:
+
+a function is declared in rRust using the `fn` keyword and followed by a set of parthensizes that can contain the argument for the function and then a set of curly brackets, to contain the code body of the function. You can specify arguments as follows, ` fn my_function ( x: i32) {}`, x is the argument or parameter and then we specifiy what type x has to be in order to be passed as a proper argument. Functions in Rust are made up of statements(instruction that performs an action and returns no value, i.e. `let x =5;`) 
+
+alright so expressions, so rust is an expression based language whatever the fuck that means, but basically when you create a variable its a statement, it doesn't return anything so its a statement. as in line with this llogic the way you can assign two variables teh same value like in c/c++, ` int x = y = 3` we cannot do `let x = ( let y = 5)` in rust cuz we are not returning anything to bind to x. basically an expression evaluates to a value. so 5 +6 is an expression as it evalutes to 11, whereas let x =11 doesn't evaluate to anything cuz its just a vriable assignment. 
