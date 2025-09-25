@@ -125,6 +125,71 @@ The array is another compound data type except an array may only contain values 
 
 ##### Functions:
 
-a function is declared in rRust using the `fn` keyword and followed by a set of parthensizes that can contain the argument for the function and then a set of curly brackets, to contain the code body of the function. You can specify arguments as follows, ` fn my_function ( x: i32) {}`, x is the argument or parameter and then we specifiy what type x has to be in order to be passed as a proper argument. Functions in Rust are made up of statements(instruction that performs an action and returns no value, i.e. `let x =5;`) 
+a function is declared in Rust using the `fn` keyword and followed by a set of parenthesizes that can contain the argument for the function and then a set of curly brackets, to contain the code body of the function. You can specify arguments as follows, ` fn my_function ( x: i32) {}`, x is the argument or parameter and then we specify what type x has to be in order to be passed as a proper argument. Functions in Rust are made up of statements(instruction that performs an action and returns no value, i.e. `let x =5;`) that may optionally end in an expression( an expression will evaluate to a resultant value). 
 
-alright so expressions, so rust is an expression based language whatever the fuck that means, but basically when you create a variable its a statement, it doesn't return anything so its a statement. as in line with this llogic the way you can assign two variables teh same value like in c/c++, ` int x = y = 3` we cannot do `let x = ( let y = 5)` in rust cuz we are not returning anything to bind to x. basically an expression evaluates to a value. so 5 +6 is an expression as it evalutes to 11, whereas let x =11 doesn't evaluate to anything cuz its just a vriable assignment. 
+alright so expressions, so rust is an expression based language whatever the fuck that means, but basically when you create a variable its a statement, it doesn't return anything so its a statement. as in line with this logic the way you can assign two variables the same value like in c/c++, ` int x = y = 3` we cannot do `let x = ( let y = 5)` in rust cuz we are not returning anything to bind to x. basically an expression evaluates to a value. so 5 +6 is an expression as it evaluates to 11, whereas let x =11 doesn't evaluate to anything cuz its just a variable assignment. 
+
+so here's the example the rust book gives for us to understand this a little better,
+` fn main(){
+	let y ={
+		let x =3;
+		x+1
+	};
+
+	println!("The value of y is: {y}");
+}`
+Alright so when we include a semicolon to the end of a line, that line turns into a statement and it will not return anything for us to return. but if we leave it off then it remains an expression. when writing functions in rust we can return values to the code that initially calls them, we don't name return values but you do need to return their type with an arrow, ->. so like we could do this like `fn funky() -> i32{5}` The return value of a function is synonymous with the value of the final expression in the block of the body of a function. you can return early from a function in rust if you use the return keyword and specifying a value like you would in c++ but it is not needed in the contact of using Rust. 
+
+
+##### Controlling the flow of a program:
+
+If else works exactly the same as it does in any other language, syntax is as follows,
+`if x<5 {
+	println!("if");
+   } else{
+	println!("Else");
+	}`
+
+since an if statement is an expression, or can be used as one at least we can use it to assign values to variables. Here's a quick example
+`let condition = true;
+ let x = if condition { 5 } else [ 6};` This will assign x to 5. Types that the if and else evaluate too must match with each other, otherwise an error will be thrown. 
+so Rust has several kinds of loops, these are as follows `loop, while, and for` 
+The loop keyword in Rust executes a block of code forever unless it is explicitly told not too. you can break a loop by using the break keyword, this will break the loop. 
+The most innermost loop will be broken when break or continue are used when you are dealing with several loops, however to circumvent this you can use a loop label, which is an identifier before the loop. implanted as such ` loop_name: loop {}` 
+
+While works the same way it would it any other language and is implemented as such, ` while number != 0 {}`. A for loop works exactly the way it does in python and is declared syntactically as follows, ` for n in nums {}`. so we have a neat little thing called Range which is exactly what it sounds like and allows us to specify a specific range that we would like to go through, like for example we could do following, `for num in (1..5){}` this would effectively work as an iterator, you can also use the method .rev() which will reverse the range instruction. 
+
+
+#### Chapter 4: 
+
+Ownership, Heap and Stack are the two main things we will talk about here.
+- The stack is a last in, first out organization that stores data accordingly, this is data that must be a fixed size and cannot change, when data is added to the stack it is called pushing, and when it is removed it is called popping. 
+- The heap is an allocated resource, in other words this means that the program must request a certain amount of space for data, the memory allocator then searches for a block of memory that is big enough for the requested size, and then returns a pointer to that memory location. This is called allocating. 
+
+The heap is much much slower then the stack, and requires more processing power( and time) to access data. This is beacuse instead of just knowing where your data is like the stack( directly on the top), the heap must go through a pointer to access the data. Data in the heap can also be located further away from other data, as opposed to the stack where all the data is directly next to each other in memory. So basically in a nutshell, ownership is all about managing data that is in teh heap. 
+
+Each value is going to have an owner, there may only be one owner, and once the owner is out of scope then the value that it owns will be dropped.
+
+##### Variable Scope:
+
+scope is the range within a program for which an item is valid. So a variable declared within a certain scope will only be valid until that scope ends. for example
+`{
+	let s ="hello"
+
+ }`
+s is only valid from the first { to the second, once that scope ends then s is no longer a valid variable. Since string literals are immutable and cannot take user input, you can use String type to take input, and/or just use as a mutable type. String is stored in the heap since its size is not known at compilation. you can declare it like ` let s =String::from("I am a string literal");` 
+string literals are hardcoded, and thus stored on the stack. Much faster and effecient, this however comes at the cost of being immutable. But there is no garbage collector so in Rust we cannot move forward without handling the memory. 
+So with languages with garbage collectors, there is no need to start to worry about memory being used. The garabe collector automatically handles it. But rust doesn't have a garbage collector, but instead of having to manually allocate and check for memory, Rust just automaticallys stops supporting memory once the owner is no longer in scope. so you can use the String and as long as you end its scope the memory will be free by the end, this is because Rust automaically runs `drop` at the end of each {} so it knows where to drop it at compile time and then actually drops it once you hit runtime. 
+So because of this Rust handles things quite a bit differently, so like you can assign a integer to another integer with no trouble as they are both fixed sizes and can jsut be pushed to the stack. So a String type is made up of three parts, a length which is how much memory in bytes the contents of the String is currently using, a capacity which is the total amount of memory the String has received from the allocator, and finally a pointer which points to the memory where the String is stored. so when you assign the String to a new variable you are copying the length, capacity, and the pointer, now all of those are stored in the stack, what you are not doing is copying the actual data that is stored within the heap itself. 
+But this is a problem, since they point to the same location Rust will try to clear the memory twice, this is refered to as a double free error and is a memory safety bug. to prevent this Rust instead considers the orginal variable to no longer be valid, so it does not need to clear any memory in the heap. This is called a Move, because of this Rust will never cerate a deep copy of any variables so you don't have to worry about creating copies as it is assumed that it is an inexpensive operation.
+
+Now the inverse of this operation is also true, if you assign a brand new value to to a preexisting variable Rust will just automatically call drop and free the orginal value's memory. 
+
+You can also create a deep clone of a variable and its value if you need too, this is refered to as a clone operation, and does copy the heap data. Assume that this is arbitrary and that the code will be expes=nsive to run. it is also a definite sign that something different then a copy is happening.
+Here is an example of that operation
+`
+let s1 = String::from("hello");
+let s2 = s1.clone();
+`
+
+So how does all of this work with data that exists in the stack? 
