@@ -175,8 +175,7 @@ Each value is going to have an owner, there may only be one owner, and once the 
 scope is the range within a program for which an item is valid. So a variable declared within a certain scope will only be valid until that scope ends. for example
 `{
 	let s ="hello"
-
- }`
+}`
 s is only valid from the first { to the second, once that scope ends then s is no longer a valid variable. Since string literals are immutable and cannot take user input, you can use String type to take input, and/or just use as a mutable type. String is stored in the heap since its size is not known at compilation. you can declare it like ` let s =String::from("I am a string literal");` 
 string literals are hardcoded, and thus stored on the stack. Much faster and effecient, this however comes at the cost of being immutable. But there is no garbage collector so in Rust we cannot move forward without handling the memory. 
 So with languages with garbage collectors, there is no need to start to worry about memory being used. The garabe collector automatically handles it. But rust doesn't have a garbage collector, but instead of having to manually allocate and check for memory, Rust just automaticallys stops supporting memory once the owner is no longer in scope. so you can use the String and as long as you end its scope the memory will be free by the end, this is because Rust automaically runs `drop` at the end of each {} so it knows where to drop it at compile time and then actually drops it once you hit runtime. 
