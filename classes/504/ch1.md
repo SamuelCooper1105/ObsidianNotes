@@ -1,0 +1,1 @@
+union is $\cup$ where the resulting set has all the elements in set 1 or set 2
