@@ -8,3 +8,9 @@ number is the amount of bytes
 or the size of the unit that you are addressing
 
 n-dimentional arrays are coreated from a series of one dimensional array. everything is getting stored in a sequential single dimension order.
+References
+Motorola - MC68000 Family Programmer's Reference Manual (M68000
+PM/AD)
+● Motorola Documentation
+● ARM AAarch64 developer website
+● Bare metal programming for AArch64: https://github.com/s-matyukevich/raspberry-pi-os
